@@ -5,8 +5,13 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "IngredientData", menuName = "ScriptableObjects/IngredientData", order = 0)]
 public class IngredientData : ScriptableObject {
 
-    public new string name;
-    public string description;
-    public Sprite ingredientIcon;
+    [field: SerializeField]
+    public string Name { get; set; }
+
+    [field: SerializeField]
+    public string Description { get; set; }
+
+    [field: SerializeField]
+    public Sprite Icon { get; set; }
 
 }

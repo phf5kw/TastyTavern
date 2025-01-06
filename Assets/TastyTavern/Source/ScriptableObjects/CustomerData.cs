@@ -4,9 +4,19 @@ using UnityEngine.InputSystem.Utilities;
 
 [CreateAssetMenu(fileName = "CustomerData", menuName = "ScriptableObjects/CustomerData", order = 0)]
 public class CustomerData : ScriptableObject {
-    public new string name;
-    public List<Sprite> appearance;
-    public List<string> dialogue;
-    public int patience;
-    public OrderData order;
+    
+    [field: SerializeField]
+    public string Name { get; set; }
+
+    [field: SerializeField]
+    public List<Sprite> Appearance { get; set; }
+
+    [field: SerializeField]
+    public List<string> Dialogue { get; set; }
+
+    [field: SerializeField]
+    public int Patience { get; set; }
+
+    [field: SerializeField]
+    public OrderData Order { get; set; }
 }

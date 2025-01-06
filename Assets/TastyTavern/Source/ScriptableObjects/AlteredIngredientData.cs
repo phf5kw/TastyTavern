@@ -4,15 +4,16 @@ using UnityEngine;
 
 [CreateAssetMenu(fileName = "IngredientData", menuName = "ScriptableObjects/AlteredIngredientData", order = 0)]
 public class AlteredIngredientData : IngredientData  {
-    public List<Property> properties = new();
 
-    public enum Property{
-        Cut,
-        Cooked,
-        Salted,
-        Peppered,
-    }
+    [field: SerializeField]
+    public List<Property> Properties { get; set; }
 
 }
 
+public enum Property{
+    Cut,
+    Cooked,
+    Salted,
+    Peppered,
+}
 
