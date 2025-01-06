@@ -7,7 +7,7 @@
                 <engine:VisualElement name="IngredientsPanel" style="flex-grow: 1; height: 675px; width: 574px;">
                     <engine:Label text="Ingredients" style="height: 60px; width: 368px; font-size: 40px; -unity-text-align: middle-center;" />
                     <engine:VisualElement name="Ingredients" style="flex-grow: 1; height: 608px; width: 376px; flex-direction: row; background-color: rgba(0, 0, 0, 0.23); flex-wrap: wrap;">
-                        <engine:Button text="Button" name="Button" class="ingredient" />
+                        <engine:Button text="Button" name="onion" class="ingredient" />
                         <engine:Button text="Button" name="Button" class="ingredient" />
                         <engine:Button text="Button" name="Button" class="ingredient" />
                         <engine:Button text="Button" name="Button" class="ingredient" />
