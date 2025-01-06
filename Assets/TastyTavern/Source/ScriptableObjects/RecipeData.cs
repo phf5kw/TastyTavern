@@ -21,12 +21,12 @@ public class RecipeData : ScriptableObject {
     public List<IngredientData> Ingredients { get; set; }
 
     [field: SerializeField]
-    public Station[] StationSequence { get; set; }
+    public StationType[] StationSequence { get; set; }
     // TODO: Add Biome, Station details, maybe NPC
     // Does the Recipe need to know which NPC is associated with it?
 }
 
-public enum Station{
+public enum StationType{
     CuttingBoard,
     Pan,
     Pot,
