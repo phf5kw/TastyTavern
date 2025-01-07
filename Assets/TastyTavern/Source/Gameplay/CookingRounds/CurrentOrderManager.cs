@@ -1,3 +1,4 @@
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,12 +8,19 @@ public class CurrentOrderManager : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     [SerializeField]
-    private OrderData currentOrder; // order vs live order? if SO, doesn't need to be saved on reload.
+    private OrderData currentOrder; 
+    
+    [SerializeField]
+    private StationData currentStation;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        // ASSUMING SET ORDER AND STATION FOR NOW
+        foreach( var i in currentStation.ActiveIngredients)
+        {
+            Debug.Log("station has " + i);
+        }
     }
 
     private void OnEnable()
@@ -20,12 +28,19 @@ public class CurrentOrderManager : MonoBehaviour
         cookingUIEventChannel.OnAddIngredient += AddIngredient;
     }
 
-    private void OnDisable() {
+    private void OnDisable() 
+    {
         cookingUIEventChannel.OnAddIngredient -= AddIngredient;
     }
 
-    private void AddIngredient(IngredientData ingredientData) {
-        // TODO
+    private void AddIngredient(IngredientData ingredientData)
+    {
+        currentStation.ActiveIngredients.Append(ingredientData);
+
+        foreach( var i in currentStation.ActiveIngredients)
+        {
+            Debug.Log("station has " + i);
+        }
     }
 
     // Update is called once per frame

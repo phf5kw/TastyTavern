@@ -6,24 +6,32 @@ public class CookingMenuController : MonoBehaviour
 {
 
     public VisualElement ui;
-    public Button onion;
+    public Button onionButton;
+    // for now 
+    public IngredientData onionData;
+
+    [SerializeField]
+    private CookingUIEventChannel cookingUIEventChannel;
+
+
     private void Awake()
     {
         ui = GetComponent<UIDocument>().rootVisualElement;
     }
 
     private void OnEnable(){
-        onion = ui.Q<Button>("onion");
-        onion.clicked += OnOnionClicked;
+        onionButton = ui.Q<Button>("onion");
+        onionButton.clicked += OnOnionClicked;
     }
 
     private void OnDisable(){
-        onion.clicked -= OnOnionClicked;
+        onionButton.clicked -= OnOnionClicked;
     }
 
     // this will be kicked to another method via event channel
     private void OnOnionClicked(){
         Debug.Log("Onion clicked!");
+        cookingUIEventChannel.RaiseOnAddIngredient(onionData);
     }
 
 }

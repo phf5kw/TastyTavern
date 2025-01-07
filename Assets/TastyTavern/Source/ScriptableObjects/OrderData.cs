@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "OrderData", menuName = "ScriptableObjects/OrderData", order = 0)]
-public class OrderData : ScriptableObject {
+public class OrderData : ScriptableObject 
+{
 
     [field: SerializeField]
     public CustomerData Customer { get; set; }

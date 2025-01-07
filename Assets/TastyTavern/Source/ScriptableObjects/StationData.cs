@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "StationData", menuName = "ScriptableObject/StationData", order = 0)]
-public class StationData : ScriptableObject {
+public class StationData : ScriptableObject 
+{
     
     /// <summary>
     /// The enum describing what type of station this is
@@ -21,4 +22,12 @@ public class StationData : ScriptableObject {
     /// </summary>
     [field: SerializeField]
     public int ActionTime { get; set; }
+}
+
+public enum StationType
+{
+    CuttingBoard,
+    Pan,
+    Pot,
+    Serving,
 }
