@@ -9,10 +9,10 @@ public class CustomerData : ScriptableObject {
     public string Name { get; set; }
 
     [field: SerializeField]
-    public List<Sprite> Appearance { get; set; }
+    public List<Sprite> Appearance { get; set; } = new List<Sprite>();
 
     [field: SerializeField]
-    public List<string> Dialogue { get; set; }
+    public List<string> Dialogue { get; set; } = new List<string>();
 
     [field: SerializeField]
     public int Patience { get; set; }

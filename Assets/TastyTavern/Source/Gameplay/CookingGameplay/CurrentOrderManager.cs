@@ -19,7 +19,7 @@ public class CurrentOrderManager : MonoBehaviour
         // ASSUMING SET ORDER AND STATION FOR NOW
         foreach( var i in currentStation.ActiveIngredients)
         {
-            Debug.Log("station has " + i);
+            Debug.Log("station has " + i.Name);
         }
     }
 
@@ -35,7 +35,8 @@ public class CurrentOrderManager : MonoBehaviour
 
     private void AddIngredient(IngredientData ingredientData)
     {
-        currentStation.ActiveIngredients.Append(ingredientData);
+        Debug.Log("manager received add "+ ingredientData.Name + "ingredient broadcast");
+        currentStation.ActiveIngredients.Add(ingredientData);
 
         foreach( var i in currentStation.ActiveIngredients)
         {

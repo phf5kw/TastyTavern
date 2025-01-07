@@ -31,6 +31,7 @@ public class CookingMenuController : MonoBehaviour
     // this will be kicked to another method via event channel
     private void OnOnionClicked(){
         Debug.Log("Onion clicked!");
+        // BIND menu item to the datatype
         cookingUIEventChannel.RaiseOnAddIngredient(onionData);
     }
 

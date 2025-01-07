@@ -9,13 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 66598e149b2d230419ad673b6c9c5c91, type: 3}
-  m_Name: Stirfry
+  m_Script: {fileID: 11500000, guid: 346930eb7dd92884981a8f163439dbe0, type: 3}
+  m_Name: ServingStation
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
-  <Description>k__BackingField: 
-  <Price>k__BackingField: 0
-  <Icon>k__BackingField: {fileID: 0}
-  <Ingredients>k__BackingField:
+  <StationType>k__BackingField: 3
+  <ActiveIngredients>k__BackingField:
   - {fileID: 11400000, guid: bb0e59e5722ad564fa97f77f06198c75, type: 2}
-  <StationSequence>k__BackingField: 03000000
+  <ActionTime>k__BackingField: 0
