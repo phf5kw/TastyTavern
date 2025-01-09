@@ -12,15 +12,12 @@ public class OrderData : ScriptableObject
     public RecipeData Recipe { get; set; }
 
     [field: SerializeField]
-    public List<IngredientData> SelectedIngredients { get; set; }
+    public IngredientData[] SelectedIngredients { get; set; } 
 
     // Fields below this point are modified during gameplay after initialization //
 
     [field: SerializeField]
     public StationType CurrentStation { get; set; }
-
-    [field: SerializeField]
-    public List<IngredientData> CurrentStoredIngredients { get; set; }
 
     [field: SerializeField]
     public bool Served { get; set; }

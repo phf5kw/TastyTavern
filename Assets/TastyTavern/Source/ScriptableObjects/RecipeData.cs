@@ -19,7 +19,7 @@ public class RecipeData : ScriptableObject
     public Sprite Icon { get; set; }
 
     [field: SerializeField]
-    public List<IngredientData> Ingredients { get; set; }
+    public List<IngredientData> Ingredients { get; set; } = new List<IngredientData>();
 
     [field: SerializeField]
     public StationType[] StationSequence { get; set; }

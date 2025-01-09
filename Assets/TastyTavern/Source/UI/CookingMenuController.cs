@@ -7,6 +7,7 @@ public class CookingMenuController : MonoBehaviour
 
     public VisualElement ui;
     public Button onionButton;
+    public Button actionButton;
     // for now 
     public IngredientData onionData;
 
@@ -17,22 +18,29 @@ public class CookingMenuController : MonoBehaviour
     private void Awake()
     {
         ui = GetComponent<UIDocument>().rootVisualElement;
+        onionButton = ui.Q<Button>("onion");
+        actionButton = ui.Q<Button>("Knife");
     }
 
     private void OnEnable(){
-        onionButton = ui.Q<Button>("onion");
         onionButton.clicked += OnOnionClicked;
+        actionButton.clicked += OnActionClicked;
     }
 
     private void OnDisable(){
         onionButton.clicked -= OnOnionClicked;
+        actionButton.clicked -= OnActionClicked;
     }
 
-    // this will be kicked to another method via event channel
+    // ********GENERALIZE******Eventually, will not have ingredient specific
+    // will BIND ingredients, one function for all ingredients
     private void OnOnionClicked(){
-        Debug.Log("Onion clicked!");
-        // BIND menu item to the datatype
         cookingUIEventChannel.RaiseOnAddIngredient(onionData);
+    }
+
+    //********GENERALIZE******Eventually
+    private void OnActionClicked(){
+        cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
     }
 
 }

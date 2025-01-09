@@ -19,7 +19,7 @@ public class IngredientData : ScriptableObject
     /// List of the ingredients properties, AKA, keeping track of all actions made to them (none if raw, uncut ingredient).
     /// </summary>
     [field: SerializeField]
-    public List<Property> Properties { get; set; }
+    public List<Property> Properties { get; set; } = new List<Property>();
 
 }
 
