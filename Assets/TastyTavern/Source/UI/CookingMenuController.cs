@@ -6,9 +6,16 @@ public class CookingMenuController : MonoBehaviour
 {
 
     public VisualElement ui;
+
+    public VisualTreeAsset ingredientButtonTemplate;
+
+    public VisualElement ingredientsContainer;
+    public VisualElement actionContainer;
+
+    // for now 
     public Button onionButton;
     public Button actionButton;
-    // for now 
+    
     public IngredientData onionData;
 
     [SerializeField]
@@ -20,6 +27,10 @@ public class CookingMenuController : MonoBehaviour
         ui = GetComponent<UIDocument>().rootVisualElement;
         onionButton = ui.Q<Button>("onion");
         actionButton = ui.Q<Button>("Knife");
+        ingredientsContainer = ui.Q<VisualElement>("IngredientsContainer");
+        actionContainer = ui.Q<VisualElement>("ActionContainer");
+
+        OnLoadStation();
     }
 
     private void OnEnable(){
@@ -41,6 +52,16 @@ public class CookingMenuController : MonoBehaviour
     //********GENERALIZE******Eventually
     private void OnActionClicked(){
         cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
+    }
+
+    // add station type var
+    private void OnLoadStation(){
+        // load appropriate menu
+        // for item in stock/storage, instantiate button.
+        Debug.Log("making new button");
+        TemplateContainer ingredientButtonContainer = ingredientButtonTemplate.Instantiate();
+        ingredientsContainer.Add(ingredientButtonContainer);
+        
     }
 
 }
