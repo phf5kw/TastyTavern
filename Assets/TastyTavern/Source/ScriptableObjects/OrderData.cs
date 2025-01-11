@@ -4,6 +4,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "OrderData", menuName = "ScriptableObjects/OrderData", order = 0)]
 public class OrderData : ScriptableObject 
 {
+    [field: SerializeField]
+    public int OrderSlot { get; set; }
 
     [field: SerializeField]
     public CustomerData Customer { get; set; }
@@ -17,7 +19,10 @@ public class OrderData : ScriptableObject
     // Fields below this point are modified during gameplay after initialization //
 
     [field: SerializeField]
-    public StationType CurrentStation { get; set; }
+    public StationData CurrentStation { get; set; }
+
+    [field: SerializeField]
+    public List<StationData> Stations { get; set; } = new List<StationData>();
 
     [field: SerializeField]
     public bool Served { get; set; }

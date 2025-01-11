@@ -33,29 +33,40 @@ public class CookingMenuController : MonoBehaviour
         OnLoadStation();
     }
 
-    private void OnEnable(){
+    private void OnEnable()
+    {
         onionButton.clicked += OnOnionClicked;
         actionButton.clicked += OnActionClicked;
     }
 
-    private void OnDisable(){
+    private void OnDisable()
+    {
         onionButton.clicked -= OnOnionClicked;
         actionButton.clicked -= OnActionClicked;
     }
 
     // ********GENERALIZE******Eventually, will not have ingredient specific
     // will BIND ingredients, one function for all ingredients
-    private void OnOnionClicked(){
+    private void OnOnionClicked()
+    {
         cookingUIEventChannel.RaiseOnAddIngredient(onionData);
     }
 
     //********GENERALIZE******Eventually
-    private void OnActionClicked(){
+    private void OnActionClicked()
+    {
         cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
     }
 
+    //Can make a new order with correct numbered slot?
+    private void OrderSelected()
+    {
+        cookingUIEventChannel.RaiseOpenOrder(); // send through the related order 
+    }
+
     // add station type var
-    private void OnLoadStation(){
+    private void OnLoadStation()
+    {
         // load appropriate menu
         // for item in stock/storage, instantiate button.
         Debug.Log("making new button");
