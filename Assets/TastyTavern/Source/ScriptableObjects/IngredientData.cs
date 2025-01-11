@@ -15,20 +15,10 @@ public class IngredientData : ScriptableObject
     [field: SerializeField]
     public Sprite Icon { get; set; }
 
-    /// <summary>
-    /// List of the ingredients properties, AKA, keeping track of all actions made to them (none if raw, uncut ingredient).
-    /// </summary>
-    [field: SerializeField]
-    public List<Property> Properties { get; set; } = new List<Property>();
+    // Factory method to make instance of Ingredient
+    public Ingredient Create(){
+        return new Ingredient(this);
+    }
 
-}
-
-public enum Property
-{
-    Cut,
-    Cooked,
-    Stewed,
-    Salted,
-    Peppered,
 }
 
