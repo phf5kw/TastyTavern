@@ -215,7 +215,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12cc8dd29573d0043bb85c81557ba875, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ingredientButtonTemplate: {fileID: 0}
+  ingredientButtonTemplate: {fileID: 9197481963319205126, guid: fd1dc53020f016b4bba5485589522e4c, type: 3}
   onionData: {fileID: 11400000, guid: bb0e59e5722ad564fa97f77f06198c75, type: 2}
   cookingUIEventChannel: {fileID: 11400000, guid: 98faadf6e98d87049badef501f757299, type: 2}
 --- !u!1 &694973454

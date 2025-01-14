@@ -1,8 +1,10 @@
+using System.Collections;
+using System.ComponentModel.Design.Serialization;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 // TODO: Organize references and use Event Channels
-public class CookingMenuController : MonoBehaviour
+public class StationView : MenuView
 {
 
     public VisualElement ui;
@@ -73,6 +75,18 @@ public class CookingMenuController : MonoBehaviour
         TemplateContainer ingredientButtonContainer = ingredientButtonTemplate.Instantiate();
         ingredientsContainer.Add(ingredientButtonContainer);
         
+    }
+
+    public override IEnumerator InitializeView(){
+        yield return null; // initialize tree, set slots? Called on every station swap?
+        Slots = new Slot[6];
+        root = document.rootVisualElement;
+        root.Clear();
+
+        // generating children, frame, header, slotscontainer
+        // new slot for every class.
+
+        yield return null;
     }
 
 }
