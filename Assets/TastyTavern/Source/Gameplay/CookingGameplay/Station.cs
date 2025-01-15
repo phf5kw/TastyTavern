@@ -1,10 +1,10 @@
 using System.Collections.Generic;
-using UnityEngine;
+using Untate StationData and update as the the order advances to different stations.
+/// Stock ingreityEngine;
 
 /// <summary>
 /// This station is a live tracker of the current station and ingredient process of the current order. 
-/// It will rotate StationData and update as the the order advances to different stations.
-/// Stock ingredients for each proper station are added on instantiation/station change.
+/// It will rodients for each proper station are added on instantiation/station change.
 public class Station {
 
     public StationData Data { get; set; }
