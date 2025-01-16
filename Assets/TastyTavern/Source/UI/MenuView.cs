@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,15 +8,20 @@ public abstract class MenuView : MonoBehaviour
 {
     public Slot[] Slots;
 
+    [SerializeField] string PanelName { get; set; }
+
     [SerializeField]
     protected UIDocument document;
 
     protected VisualElement root;
 
-    IEnumerator Start(){
-        yield return StartCoroutine(InitializeView());
-    }
+    // Filling a menu component with items
+    public abstract void LoadMenu(List<Object> dataList);
 
-    public abstract IEnumerator InitializeView(); // int size = 6?
+    // IEnumerator Start(){
+    //     yield return StartCoroutine(InitializeView());
+    // }
+
+    // public abstract IEnumerator InitializeView(); // int size = 6?
 
 }

@@ -1,18 +1,20 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Slot : VisualElement{
-    public Image Icon;
-    public Sprite BaseSprite
-    public Label Label;
-    public Button button;
-    public int Index => parent.IndexOf(this);
-    
+public class Slot : VisualElement {
+    // public Image Icon { get; set; }
+    // public Sprite BaseSprite { get; set; }
+    // public Label Label { get; set; }
+    // public int Index => parent.IndexOf(this);
 
-    public Slot()
+    public Ingredient Ingredient { get; set; }
+
+    public Slot(Ingredient ingredient)
     {
-        Icon = this.CreateChild<Image>("slotIcon");
-
+        // assign sprite, img, label
+        
+        // TemplateContainer ingredientButtonContainer = buttonTemplate.Instantiate()
+        Ingredient = ingredient;
     }
 
     // private void OnEnable(){
