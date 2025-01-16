@@ -17,4 +17,14 @@ public class Order
 
     [field: SerializeField]
     public bool Served { get; set; }
+
+    public Order(Customer Customer, RecipeData recipe, Dictionary<IngredientData, List<Property>> SelectedIngredients)
+    {
+        Served = false;
+        this.Customer = Customer;
+        this.Recipe = recipe;
+        this.SelectedIngredients = SelectedIngredients;
+
+
+    }
 }

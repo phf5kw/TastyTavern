@@ -19,7 +19,8 @@ public class RecipeData : ScriptableObject
     public Sprite Icon { get; set; }
 
     [field: SerializeField]
-    public List<IngredientData> Ingredients { get; set; } = new List<IngredientData>();
+    public Dictionary<IngredientData, List<Property>> SelectedIngredients { get; set; } = new Dictionary<IngredientData, List<Property>>();
+
 
     [field: SerializeField]
     public StationType[] StationSequence { get; set; }

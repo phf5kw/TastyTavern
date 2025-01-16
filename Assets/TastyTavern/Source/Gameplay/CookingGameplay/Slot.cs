@@ -3,7 +3,7 @@ using UnityEngine.UIElements;
 
 public class Slot : VisualElement{
     public Image Icon;
-    public Sprite BaseSprite
+    public Sprite BaseSprite;
     public Label Label;
     public Button button;
     public int Index => parent.IndexOf(this);
