@@ -26,9 +26,9 @@ public class Customer { // change to class?
     public Order Order { get; set; }
 
     [field: SerializeField]
-    public Biome Biome { get; set; } // biome... scriptable object or enum
+    public BiomeData Biome { get; set; } // biome... scriptable object or enum
 
-    public Customer(string Name, List<Sprite> Appearance, List<Sprite> Faces, List<string> Dialogue, int Patience, Biome Biome) {
+    public Customer(string Name, List<Sprite> Appearance, List<Sprite> Faces, List<string> Dialogue, int Patience, BiomeData Biome) {
         this.Name = Name;
         this.Appearance = Appearance;
         this.Faces = Faces;

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 [CreateAssetMenu(fileName = "BiomeData", menuName = "ScriptableObjects/BiomeData")]
 
@@ -14,7 +15,7 @@ public class BiomeData : ScriptableObject
 
     // The recipe(s) that will show up to be learned by the player through certain Star NPCs
     [field: SerializeField]
-    public List<RecipeData> RecipesAvailable { get; set; }
+    public RecipeData[] RecipesAvailable { get; set; }
 
     // If star NPCs are getting cut, instead of recipesavailable, make a dictionary of <recipedata, int> to act as a list of recipes that appear in the shop in that biome, along with their costs
 }

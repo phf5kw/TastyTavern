@@ -24,7 +24,7 @@ public class CurrentOrderManager : MonoBehaviour
         // ASSUMING SET ORDER AND STATION FOR NOW
         foreach( var i in currentStation.ActiveIngredients)
         {
-            Debug.Log("station has " + i.Name);
+            Debug.Log("station has " + i.Data.Name);
         }
     }
 
@@ -39,7 +39,7 @@ public class CurrentOrderManager : MonoBehaviour
         Debug.Log("Selected Order " + selectedOrder);
         currentOrder = selectedOrder;
         currentStation = currentOrder.CurrentStation;
-        LoadStation(currentStation);
+        LoadStation(currentStation.Data);
     }
 
     private void LoadStation(StationData station)
