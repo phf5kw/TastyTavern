@@ -10,10 +10,10 @@ public class CurrentOrderManager : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     [SerializeField]
-    private OrderData currentOrder; 
+    private Order currentOrder; 
 
     [SerializeField]
-    private List<OrderData> allOrders; 
+    private List<Order> allOrders; 
     
     [SerializeField]
     private Station currentStation;
@@ -34,7 +34,7 @@ public class CurrentOrderManager : MonoBehaviour
     /// Changes the current order to the newly selected order.
     /// </summary>
     /// <param name="orderData"></param>
-    private void SelectOrder(OrderData selectedOrder)
+    private void SelectOrder(Order selectedOrder)
     {
         Debug.Log("Selected Order " + selectedOrder);
         currentOrder = selectedOrder;
