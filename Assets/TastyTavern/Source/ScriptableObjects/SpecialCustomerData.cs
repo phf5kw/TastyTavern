@@ -1,7 +1,8 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "SpecialCustomerData", menuName = "ScriptableObjects/SpecialCustomerData", order = 0)]
-public class SpecialCustomerData : CustomerData {
+public class SpecialCustomerData : ScriptableObject {
 
     [field: SerializeField]
     public RecipeData UnlockedRecipe { get; set; }

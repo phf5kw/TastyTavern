@@ -13,6 +13,9 @@ public class CookingUIEventChannel : ScriptableObject {
     /// <summary> Callback when a property is added to the ingredients on the working station of the current order </summary>
     public Action<Property> OnAddProperty;
 
+    /// <summary> Callback when an order is opened in the UI </summary>
+    public Action OnOpenOrder;
+
     public void RaiseOnAddIngredient(IngredientData ingredientData){
         Debug.Log("Raise on " + ingredientData.Name + " broadcasted from event channel.");
         OnAddIngredient?.Invoke(ingredientData);
@@ -21,6 +24,11 @@ public class CookingUIEventChannel : ScriptableObject {
     public void RaiseOnAddProperty(Property actionProperty){
         Debug.Log("Raise adding " + actionProperty + " broadcasted from event channel.");
         OnAddProperty?.Invoke(actionProperty);
+    }
+
+    public void RaiseOpenOrder()
+    {
+        OnOpenOrder?.Invoke();
     }
 
 }

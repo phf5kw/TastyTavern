@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Slot : VisualElement {
-    // public Image Icon { get; set; }
-    // public Sprite BaseSprite { get; set; }
-    // public Label Label { get; set; }
-    // public int Index => parent.IndexOf(this);
+public class Slot : VisualElement{
+    public Image Icon;
+    public Sprite BaseSprite;
+    public Label Label;
+    public Button button;
+    public int Index => parent.IndexOf(this);
 
     public Ingredient Ingredient { get; set; }
 

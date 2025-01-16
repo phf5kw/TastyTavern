@@ -40,7 +40,7 @@ public class StationController
     private void AddIngredient(IngredientData ingredientData)
     {
         Debug.Log("station ctrller received add "+ ingredientData.Name + "ingredient broadcast");
-        station.ActiveIngredients.Add(ingredientData);
+        station.ActiveIngredients.Add(ingredientData.Create());
 
         foreach ( var i in station.ActiveIngredients)
         {
