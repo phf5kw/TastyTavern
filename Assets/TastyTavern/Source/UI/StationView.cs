@@ -12,21 +12,28 @@ public class StationView : MonoBehaviour {
     [SerializeField] string PanelName { get; set; }
 
     [SerializeField]
-    protected UIDocument ui;
+    // protected UIDocument document; ? keep
 
-    protected VisualElement root;
+    private VisualElement root;
+    public VisualElement ingredientsSlotsContainer;
 
     // public VisualTreeAsset ingredientButtonTemplate;
 
+    private void Awake()
+    {
+        root = GetComponent<UIDocument>().rootVisualElement;
+        ingredientsSlotsContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
+        
+    }
+
     // add action item in param
     public void InitializeView(List<Ingredient> ingredients){
-        // find the ingredients Container and add new slots
-        VisualElement slotsContainer = root.Q<VisualElement>("IngredientSlotContainer");
-        slotsContainer.Clear();
-        
+        ingredientsSlotsContainer.Clear();
+
         foreach(Ingredient ingredient in ingredients){
             Slot slot = new(ingredient);
-            slotsContainer.Add(slot);
+            slot.AddToClassList(".ingredient-slot");
+            ingredientsSlotsContainer.Add(slot);
         }
     }
 }
