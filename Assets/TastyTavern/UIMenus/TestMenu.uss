@@ -1,4 +1,4 @@
-.ingredient {
+.ingredient-slot {
     width: 155px;
     height: 155px;
     border-top-left-radius: 35px;
@@ -13,7 +13,7 @@
     background-color: rgb(166, 166, 166);
 }
 
-.ingredient:hover {
+.ingredient-slot:hover {
     border-top-width: 9px;
     border-right-width: 9px;
     border-bottom-width: 9px;

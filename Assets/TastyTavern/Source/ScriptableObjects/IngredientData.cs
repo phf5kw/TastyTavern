@@ -13,7 +13,7 @@ public class IngredientData : ScriptableObject
     public string Description { get; set; }
 
     [field: SerializeField]
-    public Sprite Icon { get; set; }
+    public Sprite Sprite { get; set; }
 
     // Factory method to make instance of Ingredient
     public Ingredient Create(){

@@ -4,8 +4,7 @@ using UnityEngine.UIElements;
 public class Slot : VisualElement{
     public Image Icon;
     public Sprite BaseSprite;
-    public Label Label;
-    public Button button;
+    public Label Label = new();
     public int Index => parent.IndexOf(this);
 
     public Ingredient Ingredient { get; set; }
@@ -16,6 +15,18 @@ public class Slot : VisualElement{
         
         // TemplateContainer ingredientButtonContainer = buttonTemplate.Instantiate()
         Ingredient = ingredient;
+
+        //fill elements with ingredient info
+        BaseSprite = Ingredient.Data.Sprite;
+        Icon = new()
+        {
+            image = BaseSprite.texture
+        };
+        Label.text = Ingredient.Data.Name;
+
+        // set as children, add styles?
+        this.Add(Icon);
+        this.Add(Label);
     }
 
     // private void OnEnable(){
