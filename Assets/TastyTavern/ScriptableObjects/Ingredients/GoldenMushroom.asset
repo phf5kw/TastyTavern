@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38b5076c2de39c649b5915b54d56c2f6, type: 3}
   m_Name: GoldenMushroom
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: Punch Pepper
+  <Name>k__BackingField: Golden Mushroom
   <Description>k__BackingField: 
-  <Icon>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}

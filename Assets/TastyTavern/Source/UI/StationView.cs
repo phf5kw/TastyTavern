@@ -43,7 +43,7 @@ public class StationView : MonoBehaviour {
         foreach(Ingredient ingredient in ingredients){
             Slot slot = new(ingredient);
             Debug.Log("Slot created for " + slot.Ingredient.Data.Name);
-            slot.AddToClassList("ingredient-slot");
+            slot.AddToClassList("ingredient-slot"); // make helper methods (extension)
             ingredientSlotContainer.Add(slot);
         }
     }

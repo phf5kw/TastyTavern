@@ -1,9 +1,9 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Slot : VisualElement{
+public class Slot : Button {
     public Image Icon;
-    public Sprite BaseSprite;
+    // public Sprite BaseSprite;
     public Label Label = new();
     public int Index => parent.IndexOf(this);
 
@@ -17,10 +17,9 @@ public class Slot : VisualElement{
         Ingredient = ingredient;
 
         //fill elements with ingredient info
-        BaseSprite = Ingredient.Data.Sprite;
         Icon = new()
         {
-            image = BaseSprite.texture
+            image = Ingredient.Data.Sprite.texture
         };
         Label.text = Ingredient.Data.Name;
 

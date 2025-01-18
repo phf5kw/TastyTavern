@@ -1,23 +1,24 @@
 .ingredient-slot {
-    width: 155px;
-    height: 155px;
+    width: 44%;
+    height: 30%;
     border-top-left-radius: 35px;
     border-top-right-radius: 35px;
     border-bottom-right-radius: 35px;
     border-bottom-left-radius: 35px;
     margin-top: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
+    margin-right: 0;
+    margin-bottom: 0;
     margin-left: 15px;
+    padding: 0;
     font-size: 20px;
     background-color: rgb(166, 166, 166);
 }
 
 .ingredient-slot:hover {
-    border-top-width: 9px;
-    border-right-width: 9px;
-    border-bottom-width: 9px;
-    border-left-width: 9px;
+    border-top-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
     border-left-color: rgb(224, 224, 224);
     border-right-color: rgb(224, 224, 224);
     border-top-color: rgb(224, 224, 224);
@@ -26,4 +27,20 @@
     transition-duration: 0.05s;
     transition-timing-function: ease-out-sine;
     scale: 1.1 1.1;
+}
+
+.ingredient-icon {
+    flex-grow: 1;
+    height: 139px;
+    width: 140px;
+    background-position-y: center 0;
+    align-self: center;
+    flex-direction: column-reverse;
+}
+
+.ingredient-label {
+    -unity-text-align: lower-center;
+    height: 38px;
+    width: 100%;
+    white-space: normal;
 }
