@@ -16,6 +16,7 @@ public class StationView : MonoBehaviour {
 
     public VisualElement root;
     public VisualElement ingredientSlotContainer;
+    [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
     public IngredientData basilisk;
@@ -56,6 +57,9 @@ public class StationView : MonoBehaviour {
     }
 
     private void OnAddIngredient(Slot slot) {
+        Debug.Log(slot);
+        Debug.Log(slot.Ingredient.Data.Name);
+        Debug.Log(cookingUIEventChannel);
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
         // disable the ingredient slot here
     }
