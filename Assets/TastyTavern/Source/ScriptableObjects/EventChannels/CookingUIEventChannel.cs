@@ -14,7 +14,12 @@ public class CookingUIEventChannel : ScriptableObject {
     public Action<Property> OnAddProperty;
 
     /// <summary> Callback when an order is opened in the UI </summary>
-    public Action OnOpenOrder;
+    public Action<Order> OnOpenOrder;
+
+    /// <summary>
+    /// Callback when an order is submitted in the UI by the player
+    /// </summary>
+    public Action<Order> OnSubmitOrder;
 
     public void RaiseOnAddIngredient(IngredientData ingredientData){
         Debug.Log("Raise on " + ingredientData.Name + " broadcasted from event channel.");
@@ -26,9 +31,14 @@ public class CookingUIEventChannel : ScriptableObject {
         OnAddProperty?.Invoke(actionProperty);
     }
 
-    public void RaiseOpenOrder()
+    public void RaiseOpenOrder(Order Order)
     {
-        OnOpenOrder?.Invoke();
+        OnOpenOrder?.Invoke(Order);
+    }
+
+    public void RaiseOnSubmitOrder(Order Order)
+    {
+        OnSubmitOrder?.Invoke(Order);
     }
 
 }

@@ -8,6 +8,12 @@ public class Customer { // change to class?
     [field: SerializeField]
     public string Name { get; set; }
 
+    [field: SerializeField]
+    public CurrentOrderManager CurrentOrderManager { get; set; }
+
+    [field: SerializeField]
+    private CookingUIEventChannel cookingUIEventChannel;
+
     // This will be the eyes, clothes, hair for a character that's randomized
     [field: SerializeField]
     public List<Sprite> Appearance { get; set; } = new List<Sprite>();
@@ -43,20 +49,22 @@ public class Customer { // change to class?
             SelectedIngredients.Remove(SelectedIngredients.ElementAt(rand.Next(0, SelectedIngredients.Count)).Key);// Removing one random ingredient from the recipe in their order, for now
         
         Order = new Order(this, r, SelectedIngredients);
-        PlaceCustomerOrder();
+        PlaceCustomerOrder(Order);
         this.Biome = Biome;
     }
 
-    private void PlaceCustomerOrder()
+    private void PlaceCustomerOrder(Order Order)
     {
         Debug.Log("Order for " + Name + " has been Placed");
         // Order placed logic (UI, update the order list, etc.)
         // When CurrentOrderManager is placed in the scene (as of now it isn't yet), access that somehow and then update its private allOrders list with the new order
+        cookingUIEventChannel.RaiseOpenOrder(Order);
     }
 
-    public void CompleteCustomerOrder()
+    public void CompleteCustomerOrder() // maybe this will be called by the Station UI, or maybe the UI will have its own function. If the station UI has its own way of calling the event, then this function is useless. 
     {
         Debug.Log("Customer order completed");
         // Customer says satisfied or dissatisfied dialogue -> customer is dismissed -> related UI is updated -> allOrders list is updated -> money is received -> etc. Perhaps this could be an event instead if needed
+        cookingUIEventChannel.RaiseOnSubmitOrder(Order);
     }
 }
