@@ -16,6 +16,7 @@ public class StationView : MonoBehaviour {
 
     public VisualElement root;
     public VisualElement ingredientSlotContainer;
+    private CookingUIEventChannel cookingUIEventChannel;
 
     public IngredientData basilisk;
     public IngredientData punchPepper;

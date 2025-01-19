@@ -11,9 +11,6 @@ public class Slot : Button {
 
     public Slot(Ingredient ingredient)
     {
-        // assign sprite, img, label
-        
-        // TemplateContainer ingredientButtonContainer = buttonTemplate.Instantiate()
         Ingredient = ingredient;
 
         //fill elements with ingredient info
@@ -21,11 +18,22 @@ public class Slot : Button {
         {
             image = Ingredient.Data.Sprite.texture
         };
+        Icon.AddToClassList("ingredient-icon");
+
         Label.text = Ingredient.Data.Name;
+        Label.AddToClassList("ingredient-label");
 
         // set as children, add styles?
         this.Add(Icon);
         this.Add(Label);
+
+        this.clicked += OnClick;
+        // this.RegisterCallback<ClickEvent>(OnClick);
+    }
+
+    private void OnClick() {
+        Debug.Log("Clicked " + Ingredient.Data.Name + " Ingredient");
+
     }
 
     // private void OnEnable(){
