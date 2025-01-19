@@ -22,7 +22,15 @@ public class StationView : MonoBehaviour {
     public IngredientData basilisk;
     public IngredientData punchPepper;
 
-    // public VisualTreeAsset ingredientButtonTemplate;
+    private void OnEnable()
+    {
+        cookingUIEventChannel.OnLoadStationView += LoadStationView;
+    }
+
+    private void OnDisable() 
+    {
+        cookingUIEventChannel.OnLoadStationView -= LoadStationView;
+    }
 
     private void Awake(){
         root = GetComponent<UIDocument>().rootVisualElement;
@@ -32,18 +40,19 @@ public class StationView : MonoBehaviour {
     }
 
     private void Start(){
-        List<Ingredient> dummyIngredients = new()
-        {
-            basilisk.Create(),
-            punchPepper.Create()
-        };
-        InitializeView(dummyIngredients);
+        // List<Ingredient> dummyIngredients = new()
+        // {
+        //     basilisk.Create(),
+        //     punchPepper.Create()
+        // };
+        // InitializeView(dummyIngredients);
     }
 
     // add action item in param
     // ingredients --> live ingredients in the station storage/stock
     // CREATE ON ORDER CREATION
     public void InitializeView(List<Ingredient> ingredients){
+        Debug.Log("Initializing Station view");
         ingredientSlotContainer.Clear();
 
         foreach(Ingredient ingredient in ingredients){
@@ -57,15 +66,13 @@ public class StationView : MonoBehaviour {
     }
 
     private void OnAddIngredient(Slot slot) {
-        Debug.Log(slot);
-        Debug.Log(slot.Ingredient.Data.Name);
-        Debug.Log(cookingUIEventChannel);
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
         // disable the ingredient slot here
     }
 
     private void LoadStationView(Station station){
         // not showing active ingredients yet, just menu
+        Debug.Log("View recieved loading request from event channel");
         InitializeView(station.StockIngredients);
     }
 

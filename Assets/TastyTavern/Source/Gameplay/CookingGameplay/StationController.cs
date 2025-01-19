@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class StationController : MonoBehaviour
@@ -6,14 +7,24 @@ public class StationController : MonoBehaviour
     [SerializeField]
     private Station station;
 
+    public StationData stationData;
+    public List<IngredientData> testStock;
+
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
-    public StationController(Station station){
-        Debug.Assert(station != null, "Station model is null");
-        this.station = station;
+    public StationController(){
+        // Debug.Assert(station != null, "Station model is null");
+        // for testing
+        // this.station = new(stationData,testStock);
 
         // run initialize view uxml?
+    }
+
+    private void Awake(){
+        Debug.Log("Making station");
+        this.station = new(stationData,testStock);
+        LoadStation();
     }
 
     // handle other logic
@@ -42,7 +53,7 @@ public class StationController : MonoBehaviour
 
         foreach ( var i in station.ActiveIngredients)
         {
-            Debug.Log("station has " + i);
+            Debug.Log("station has " + i.Data.Name);
         }
     }
 
@@ -59,6 +70,11 @@ public class StationController : MonoBehaviour
         }
     }
 
+    private void LoadStation()
+    {
+        Debug.Log("Loading Station " + station.Data.StationType);
+        cookingUIEventChannel.RaiseOnLoadStationView(station);
+    }
 
 }
 

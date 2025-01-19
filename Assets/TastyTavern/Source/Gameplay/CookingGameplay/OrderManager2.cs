@@ -26,7 +26,7 @@ public class OrderManager2 : MonoBehaviour
         {
             Debug.Log("station has " + i.Data.Name);
         }
-        LoadStation(currentStation);
+        // LoadStation(currentStation);
     }
 
 
@@ -36,14 +36,14 @@ public class OrderManager2 : MonoBehaviour
         Debug.Log("Selected Order " + selectedOrder);
         currentOrder = selectedOrder;
         currentStation = currentOrder.CurrentStation;
-        LoadStation(currentStation);
+        // LoadStation(currentStation);
     }
 
-    private void LoadStation(Station station)
-    {
-        Debug.Log("Loading Station " + station.Data.StationType);
-        // all station logic is updated on station object
-        // update menu where? how does it know the data
-        cookingUIEventChannel.RaiseLoadStationView(station);
-    }
+    // private void LoadStation(Station station)
+    // {
+    //     Debug.Log("Loading Station " + station.Data.StationType);
+    //     // all station logic is updated on station object
+    //     // update menu where? how does it know the data
+    //     cookingUIEventChannel.RaiseLoadStationView(station);
+    // }
 }

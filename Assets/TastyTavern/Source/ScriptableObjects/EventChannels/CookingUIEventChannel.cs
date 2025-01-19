@@ -29,11 +29,12 @@ public class CookingUIEventChannel : ScriptableObject {
         OnAddProperty?.Invoke(actionProperty);
     }
 
-    public void RaiseOpenOrder(){
-        OnOpenOrder?.Invoke();
-    }
+    // public void RaiseOpenOrder(){
+    //     OnOpenOrder?.Invoke();
+    // }
 
-    public void RaiseLoadStationView(Station station){
+    public void RaiseOnLoadStationView(Station station){
+        Debug.Log("Raise loading " + station.Data.StationType + " broadcasted from event channel.");
         OnLoadStationView?.Invoke(station);
     }
 
