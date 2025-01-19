@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class StationController
+public class StationController : MonoBehaviour
 {
     // One station per order, start off on first station data
     [SerializeField]
@@ -8,8 +8,6 @@ public class StationController
 
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
-
-    // the view?
 
     public StationController(Station station){
         Debug.Assert(station != null, "Station model is null");
@@ -37,10 +35,10 @@ public class StationController
 
     // Move to Ingredient Slot?
 
-    private void AddIngredient(IngredientData ingredientData)
+    private void AddIngredient(Ingredient ingredient)
     {
-        Debug.Log("station ctrller received add "+ ingredientData.Name + "ingredient broadcast");
-        station.ActiveIngredients.Add(ingredientData.Create());
+        Debug.Log("station ctrller received add "+ ingredient.Data.Name + "ingredient broadcast");
+        station.ActiveIngredients.Add(ingredient);
 
         foreach ( var i in station.ActiveIngredients)
         {

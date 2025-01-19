@@ -23,12 +23,14 @@ public class StationView : MonoBehaviour {
 
     // public VisualTreeAsset ingredientButtonTemplate;
 
-    private void Awake()
-    {
+    private void Awake(){
         root = GetComponent<UIDocument>().rootVisualElement;
         Debug.Log("root is" + ingredientSlotContainer);
         ingredientSlotContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
         Debug.Log(ingredientSlotContainer);
+    }
+
+    private void Start(){
         List<Ingredient> dummyIngredients = new()
         {
             basilisk.Create(),
@@ -38,6 +40,8 @@ public class StationView : MonoBehaviour {
     }
 
     // add action item in param
+    // ingredients --> live ingredients in the station storage/stock
+    // CREATE ON ORDER CREATION
     public void InitializeView(List<Ingredient> ingredients){
         ingredientSlotContainer.Clear();
 
@@ -46,6 +50,23 @@ public class StationView : MonoBehaviour {
             Debug.Log("Slot created for " + slot.Ingredient.Data.Name);
             slot.AddToClassList("ingredient-slot"); // make helper methods (extension)
             ingredientSlotContainer.Add(slot);
+            slot.OnClickIngredient += OnAddIngredient;
         }
+        
     }
+
+    private void OnAddIngredient(Slot slot) {
+        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
+        // disable the ingredient slot here
+    }
+
+    private void LoadStationView(Station station){
+        // not showing active ingredients yet, just menu
+        InitializeView(station.StockIngredients);
+    }
+
+    //     private void OnActionClicked()
+//     {
+//         cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
+//     }
 }

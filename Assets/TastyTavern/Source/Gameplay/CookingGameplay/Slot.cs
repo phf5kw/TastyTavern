@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -8,6 +9,9 @@ public class Slot : Button {
     public int Index => parent.IndexOf(this);
 
     public Ingredient Ingredient { get; set; }
+    
+
+    public event Action<Slot> OnClickIngredient = delegate { };
 
     public Slot(Ingredient ingredient)
     {
@@ -33,7 +37,8 @@ public class Slot : Button {
 
     private void OnClick() {
         Debug.Log("Clicked " + Ingredient.Data.Name + " Ingredient");
-
+        OnClickIngredient.Invoke(this);
+        // cookingUIEventChannel.RaiseOnAddIngredient(Ingredient);
     }
 
     // private void OnEnable(){

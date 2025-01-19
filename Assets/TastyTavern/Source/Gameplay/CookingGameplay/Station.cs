@@ -27,6 +27,7 @@ public class Station {
 
     // Why not just make Station using normal constructor outside of the Data class? Pass in as Ingredient instead perhaps?
 
+    // "SET ASIDE" FUNCTION
     public void MoveActiveToStored(){
         StoredIngredients.AddRange(ActiveIngredients);
         ActiveIngredients.Clear();
