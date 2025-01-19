@@ -70,14 +70,13 @@ public class StationView : MonoBehaviour {
         // disable the ingredient slot here
     }
 
+    private void OnActionClicked(){
+        cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
+    }
+
     private void LoadStationView(Station station){
         // not showing active ingredients yet, just menu
         Debug.Log("View recieved loading request from event channel");
         InitializeView(station.StockIngredients);
     }
-
-    //     private void OnActionClicked()
-//     {
-//         cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
-//     }
 }

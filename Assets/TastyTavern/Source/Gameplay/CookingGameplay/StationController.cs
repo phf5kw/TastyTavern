@@ -14,7 +14,7 @@ public class StationController : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     public StationController(){
-        // Debug.Assert(station != null, "Station model is null");
+        Debug.Assert(station != null, "Station model is null");
         // for testing
         // this.station = new(stationData,testStock);
 
@@ -22,7 +22,6 @@ public class StationController : MonoBehaviour
     }
 
     private void Awake(){
-        Debug.Log("Making station");
         this.station = new(stationData,testStock);
         LoadStation();
     }
@@ -44,26 +43,16 @@ public class StationController : MonoBehaviour
         cookingUIEventChannel.OnAddProperty -= AddProperty;
     }
 
-    // Move to Ingredient Slot?
 
+    /// Adds ingredient to current active workspace (from stock)
     private void AddIngredient(Ingredient ingredient)
     {
-        Debug.Log("station ctrller received add "+ ingredient.Data.Name + "ingredient broadcast");
         station.ActiveIngredients.Add(ingredient);
-
-        foreach ( var i in station.ActiveIngredients)
-        {
-            Debug.Log("station has " + i.Data.Name);
-        }
     }
 
-    /// <summary>
     /// Applies a property to all active ingredients on the station
-    /// </summary>
-    /// <param name="actionProperty"> The property enum being applied </param>
     private void AddProperty(Property actionProperty)
     {
-        Debug.Log("manager received add " + actionProperty + " property broadcast");
         foreach (var ingredient in station.ActiveIngredients)
         {
            ingredient.Properties.Add(actionProperty);
@@ -77,6 +66,3 @@ public class StationController : MonoBehaviour
     }
 
 }
-
-
-// Order -> Monobehavior exposedto unity
