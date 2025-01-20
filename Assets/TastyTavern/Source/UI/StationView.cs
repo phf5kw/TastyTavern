@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Mono.Cecil.Cil;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,21 +13,85 @@ public class StationView : MonoBehaviour {
     [SerializeField] string PanelName { get; set; }
 
     [SerializeField]
-    protected UIDocument ui;
+    protected UIDocument document;
 
-    protected VisualElement root;
+    public VisualElement root;
+    public VisualElement ingredientSlotContainer;
+    public VisualElement actionSlotContainer;
+    [SerializeField]
+    private CookingUIEventChannel cookingUIEventChannel;
 
-    // public VisualTreeAsset ingredientButtonTemplate;
+    public IngredientData basilisk;
+    public IngredientData punchPepper;
+
+    private void OnEnable()
+    {
+        cookingUIEventChannel.OnLoadStationView += LoadStationView;
+    }
+
+    private void OnDisable() 
+    {
+        cookingUIEventChannel.OnLoadStationView -= LoadStationView;
+    }
+
+    private void Awake(){
+        document = GetComponent<UIDocument>();
+        root = document.rootVisualElement;
+        Debug.Log("root is" + ingredientSlotContainer);
+        ingredientSlotContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
+        actionSlotContainer = root.Q<VisualElement>("ActionSlotContainer");
+        Debug.Log(ingredientSlotContainer);
+    }
+
+    private void Start(){
+        // List<Ingredient> dummyIngredients = new()
+        // {
+        //     basilisk.Create(),
+        //     punchPepper.Create()
+        // };
+        // InitializeView(dummyIngredients);
+    }
 
     // add action item in param
-    public void InitializeView(List<Ingredient> ingredients){
-        // find the ingredients Container and add new slots
-        VisualElement slotsContainer = root.Q<VisualElement>("IngredientSlotContainer");
-        slotsContainer.Clear();
-        
+    // ingredients --> live ingredients in the station storage/stock
+    // CREATE ON ORDER CREATION
+    public void InitializeView(ActionData actionData,List<Ingredient> ingredients){
+        Debug.Log("Initializing Station view");
+
+        actionSlotContainer.Clear();
+        ActionSlot actionSlot = new(actionData);
+        Debug.Log($"Slot created for {actionSlot.ActionData.Name}");
+        actionSlot.AddToClassList("action-slot");
+        actionSlot.AddToClassList("slot");
+        actionSlotContainer.Add(actionSlot);
+        actionSlot.OnClickAction += OnAddProperty;
+
+
+        ingredientSlotContainer.Clear();
         foreach(Ingredient ingredient in ingredients){
             Slot slot = new(ingredient);
-            slotsContainer.Add(slot);
+            Debug.Log("Slot created for " + slot.Ingredient.Data.Name);
+            slot.AddToClassList("ingredient-slot"); // make helper methods?
+            slot.AddToClassList("slot");
+            ingredientSlotContainer.Add(slot);
+            slot.OnClickIngredient += OnAddIngredient;
         }
+        
+    }
+
+    private void OnAddIngredient(Slot slot) {
+        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
+        slot.SetEnabled(false);
+        slot.RemoveFromClassList("slot");
+    }
+
+    private void OnAddProperty(ActionSlot actionSlot){
+        cookingUIEventChannel.RaiseOnAddProperty(actionSlot.ActionData.Property); // Property enum actionProperty
+    }
+
+    private void LoadStationView(Station station){
+        // TODO: Load active ingredients
+        Debug.Log("View recieved loading request from event channel");
+        InitializeView(station.Data.ActionData,station.StockIngredients);
     }
 }

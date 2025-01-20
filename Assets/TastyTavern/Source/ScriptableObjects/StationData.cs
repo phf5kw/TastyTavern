@@ -12,7 +12,7 @@ public class StationData : ScriptableObject
     public Sprite Background { get; set; }
 
     [field: SerializeField]
-    public int ActionTime { get; set; } // Make Action into Scriptable object too?
+    public ActionData ActionData { get; set; } // Make Action into Scriptable object too?
 
     // Factory method to make instance of Station
     public Station Create(List<IngredientData> stock){

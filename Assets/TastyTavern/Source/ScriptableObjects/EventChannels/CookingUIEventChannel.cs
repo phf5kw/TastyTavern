@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
@@ -8,17 +9,19 @@ using UnityEngine;
 public class CookingUIEventChannel : ScriptableObject {
     
     /// <summary> Callback when an ingredient is added to the working station of the current order </summary>
-    public Action<IngredientData> OnAddIngredient;
+    public Action<Ingredient> OnAddIngredient;
 
     /// <summary> Callback when a property is added to the ingredients on the working station of the current order </summary>
     public Action<Property> OnAddProperty;
 
+    public Action<Station> OnLoadStationView;
+
     /// <summary> Callback when an order is opened in the UI </summary>
     public Action OnOpenOrder;
 
-    public void RaiseOnAddIngredient(IngredientData ingredientData){
-        Debug.Log("Raise on " + ingredientData.Name + " broadcasted from event channel.");
-        OnAddIngredient?.Invoke(ingredientData);
+    public void RaiseOnAddIngredient(Ingredient ingredient){
+        Debug.Log("Raise on " + ingredient.Data.Name + " broadcasted from event channel.");
+        OnAddIngredient?.Invoke(ingredient);
     }
 
     public void RaiseOnAddProperty(Property actionProperty){
@@ -26,9 +29,13 @@ public class CookingUIEventChannel : ScriptableObject {
         OnAddProperty?.Invoke(actionProperty);
     }
 
-    public void RaiseOpenOrder()
-    {
-        OnOpenOrder?.Invoke();
+    // public void RaiseOpenOrder(){
+    //     OnOpenOrder?.Invoke();
+    // }
+
+    public void RaiseOnLoadStationView(Station station){
+        Debug.Log("Raise loading " + station.Data.StationType + " broadcasted from event channel.");
+        OnLoadStationView?.Invoke(station);
     }
 
 }
