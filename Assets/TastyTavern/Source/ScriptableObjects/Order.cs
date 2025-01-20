@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Order
@@ -32,7 +33,31 @@ public class Order
         Recipe = recipe;
         this.SelectedIngredients = SelectedIngredients;
         CurrentStation = null; // This needs to be whatever the default station is... I don't know yet
+    }
 
+    public bool isComplete()
+    {
+        foreach (Ingredient ingredient in CurrentStation.ActiveIngredients)
+        {
+            if (SelectedIngredients.Keys.Contains(ingredient.Data) && AreListsEqual(SelectedIngredients[ingredient.Data], ingredient.Properties)) return false;
+        }
+        return true;
+    }
 
+    bool AreListsEqual(List<Property> list1, List<Property> list2)
+    {
+        if (list1.Count != list2.Count)
+            return false;
+
+        list1.Sort();
+        list2.Sort();
+
+        for (int i = 0; i < list1.Count; i++)
+        {
+            if (list1[i] != list2[i])
+                return false;
+        }
+
+        return true;
     }
 }
