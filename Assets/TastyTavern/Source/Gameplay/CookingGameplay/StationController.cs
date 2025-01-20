@@ -14,7 +14,6 @@ public class StationController : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     public StationController(){
-        Debug.Assert(station != null, "Station model is null");
         // for testing
         // this.station = new(stationData,testStock);
 

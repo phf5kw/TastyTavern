@@ -4,9 +4,7 @@ using UnityEngine.UIElements;
 
 public class Slot : Button {
     public Image Icon;
-    // public Sprite BaseSprite;
     public Label Label = new();
-    public int Index => parent.IndexOf(this);
 
     public Ingredient Ingredient { get; set; }
 

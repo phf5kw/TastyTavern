@@ -12,10 +12,11 @@ public class StationView : MonoBehaviour {
     [SerializeField] string PanelName { get; set; }
 
     [SerializeField]
-    // protected UIDocument document; ? keep
+    protected UIDocument document;
 
     public VisualElement root;
     public VisualElement ingredientSlotContainer;
+    public VisualElement actionSlotContainer;
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
@@ -33,9 +34,11 @@ public class StationView : MonoBehaviour {
     }
 
     private void Awake(){
-        root = GetComponent<UIDocument>().rootVisualElement;
+        document = GetComponent<UIDocument>();
+        root = document.rootVisualElement;
         Debug.Log("root is" + ingredientSlotContainer);
         ingredientSlotContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
+        ingredientSlotContainer = root.Q<VisualElement>("ActionSlotContainer");
         Debug.Log(ingredientSlotContainer);
     }
 
@@ -67,7 +70,7 @@ public class StationView : MonoBehaviour {
 
     private void OnAddIngredient(Slot slot) {
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
-        // disable the ingredient slot here
+        // TODO: Disable ingredient slot
     }
 
     private void OnActionClicked(){
@@ -75,7 +78,7 @@ public class StationView : MonoBehaviour {
     }
 
     private void LoadStationView(Station station){
-        // not showing active ingredients yet, just menu
+        // TODO: Load active ingredients
         Debug.Log("View recieved loading request from event channel");
         InitializeView(station.StockIngredients);
     }

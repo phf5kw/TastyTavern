@@ -36,9 +36,40 @@
     align-content: flex-start;
 }
 
-.ingredient-slot:hover {
+.slot:hover {
     scale: 1.1 1.1;
     transition-property: scale;
     transition-duration: 0.2s;
     transition-timing-function: ease-in-sine;
+}
+
+.action-slot {
+    height: 424px;
+    width: 176px;
+    background-image: none;
+    background-size: 100% 100%;
+    font-size: 34px;
+    align-self: center;
+    margin-top: 11px;
+    margin-right: 11px;
+    margin-bottom: 11px;
+    margin-left: 11px;
+    border-top-left-radius: 49px;
+    border-top-right-radius: 49px;
+    border-bottom-right-radius: 49px;
+    border-bottom-left-radius: 49px;
+    flex-direction: column;
+}
+
+.action-icon {
+    flex-grow: 1;
+    width: auto;
+    height: 100%;
+    background-image: url("project://database/Assets/TastyTavern/Art/Demo/knife.png?fileID=2800000&guid=353ea572d83b485418eeed2fad5fc138&type=3#knife");
+    background-size: 140% 100%;
+}
+
+.action-label {
+    font-size: 32px;
+    height: 15%;
 }
