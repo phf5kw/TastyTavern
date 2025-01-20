@@ -1,36 +1,38 @@
+using System;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class Slot : VisualElement{
+public class Slot : Button {
     public Image Icon;
-    public Sprite BaseSprite;
-    public Label Label;
-    public Button button;
-    public int Index => parent.IndexOf(this);
+    public Label Label = new();
 
     public Ingredient Ingredient { get; set; }
 
+    public event Action<Slot> OnClickIngredient = delegate { };
+
     public Slot(Ingredient ingredient)
     {
-        // assign sprite, img, label
-        
-        // TemplateContainer ingredientButtonContainer = buttonTemplate.Instantiate()
         Ingredient = ingredient;
+
+        Icon = new()
+        {
+            image = Ingredient.Data.Sprite.texture
+        };
+
+        Label.text = Ingredient.Data.Name;
+
+        Icon.AddToClassList("ingredient-icon");
+        Label.AddToClassList("ingredient-label");
+        this.Add(Icon);
+        this.Add(Label);
+
+        this.clicked += OnClick;
     }
 
-    // private void OnEnable(){
-    //     button.clicked += OnClick;
-    // }
-
-    // private void OnDisable(){
-    //     button.clicked -= OnClick;
-    // }
-
-    // private void OnClick()
-    // {
-    //     Debug.Log("Created button clicked");
-    //     // event channel stuff
-    // }
+    private void OnClick() {
+        Debug.Log("Clicked " + Ingredient.Data.Name + " Ingredient");
+        OnClickIngredient.Invoke(this);
+    }
 
 }
 

@@ -1,21 +1,28 @@
+using System.Collections.Generic;
 using UnityEngine;
 
-public class StationController
+public class StationController : MonoBehaviour
 {
     // One station per order, start off on first station data
     [SerializeField]
     private Station station;
 
+    public StationData stationData;
+    public List<IngredientData> testStock;
+
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
-    // the view?
-
-    public StationController(Station station){
-        Debug.Assert(station != null, "Station model is null");
-        this.station = station;
+    public StationController(){
+        // for testing
+        // this.station = new(stationData,testStock);
 
         // run initialize view uxml?
+    }
+
+    private void Awake(){
+        this.station = new(stationData,testStock);
+        LoadStation();
     }
 
     // handle other logic
@@ -35,34 +42,32 @@ public class StationController
         cookingUIEventChannel.OnAddProperty -= AddProperty;
     }
 
-    // Move to Ingredient Slot?
 
-    private void AddIngredient(IngredientData ingredientData)
+    /// Adds ingredient to current active workspace (from stock)
+    private void AddIngredient(Ingredient ingredient)
     {
-        Debug.Log("station ctrller received add "+ ingredientData.Name + "ingredient broadcast");
-        station.ActiveIngredients.Add(ingredientData.Create());
-
-        foreach ( var i in station.ActiveIngredients)
-        {
-            Debug.Log("station has " + i);
-        }
+        station.ActiveIngredients.Add(ingredient);
+        station.StockIngredients.Remove(ingredient);
+        station.PrintContents();
     }
 
-    /// <summary>
     /// Applies a property to all active ingredients on the station
-    /// </summary>
-    /// <param name="actionProperty"> The property enum being applied </param>
     private void AddProperty(Property actionProperty)
     {
-        Debug.Log("manager received add " + actionProperty + " property broadcast");
         foreach (var ingredient in station.ActiveIngredients)
         {
-           ingredient.Properties.Add(actionProperty);
+            if(!ingredient.Properties.Contains(actionProperty)){
+                ingredient.Properties.Add(actionProperty);
+            }
         }
+
+        station.PrintContents();
     }
 
+    private void LoadStation()
+    {
+        Debug.Log("Loading Station " + station.Data.StationType);
+        cookingUIEventChannel.RaiseOnLoadStationView(station);
+    }
 
 }
-
-
-// Order -> Monobehavior exposedto unity
