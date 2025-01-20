@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Cut
   m_EditorClassIdentifier: 
   <ActionTime>k__BackingField: 0
-  <Name>k__BackingField: 
-  <Sprite>k__BackingField: {fileID: 0}
+  <Name>k__BackingField: Cut
+  <Sprite>k__BackingField: {fileID: 761100573506273824, guid: 353ea572d83b485418eeed2fad5fc138, type: 3}
   <Property>k__BackingField: 0

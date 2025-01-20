@@ -13,7 +13,5 @@ MonoBehaviour:
   m_Name: ServingStation
   m_EditorClassIdentifier: 
   <StationType>k__BackingField: 3
-  <ActiveIngredients>k__BackingField:
-  - {fileID: 11400000, guid: bb0e59e5722ad564fa97f77f06198c75, type: 2}
-  <StoredIngredients>k__BackingField: []
-  <ActionTime>k__BackingField: 0
+  <Background>k__BackingField: {fileID: 0}
+  <ActionData>k__BackingField: {fileID: 11400000, guid: 019c9c34b9a69f049a173ac0425af55f, type: 2}
