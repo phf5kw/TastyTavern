@@ -47,6 +47,7 @@ public class StationController : MonoBehaviour
     private void AddIngredient(Ingredient ingredient)
     {
         station.ActiveIngredients.Add(ingredient);
+        station.StockIngredients.Remove(ingredient);
         station.PrintContents();
     }
 
@@ -55,7 +56,9 @@ public class StationController : MonoBehaviour
     {
         foreach (var ingredient in station.ActiveIngredients)
         {
-           ingredient.Properties.Add(actionProperty);
+            if(!ingredient.Properties.Contains(actionProperty)){
+                ingredient.Properties.Add(actionProperty);
+            }
         }
 
         station.PrintContents();

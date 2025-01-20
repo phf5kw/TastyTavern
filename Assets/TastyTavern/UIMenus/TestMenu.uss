@@ -65,7 +65,7 @@
     flex-grow: 1;
     width: auto;
     height: 100%;
-    background-image: url("project://database/Assets/TastyTavern/Art/Demo/knife.png?fileID=2800000&guid=353ea572d83b485418eeed2fad5fc138&type=3#knife");
+    background-image: none;
     background-size: 140% 100%;
 }
 

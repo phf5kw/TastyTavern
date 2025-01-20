@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Mono.Cecil.Cil;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -80,7 +81,8 @@ public class StationView : MonoBehaviour {
 
     private void OnAddIngredient(Slot slot) {
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
-        // TODO: Disable ingredient slot
+        slot.SetEnabled(false);
+        slot.RemoveFromClassList("slot");
     }
 
     private void OnAddProperty(ActionSlot actionSlot){
