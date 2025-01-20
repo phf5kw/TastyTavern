@@ -38,7 +38,7 @@ public class StationView : MonoBehaviour {
         root = document.rootVisualElement;
         Debug.Log("root is" + ingredientSlotContainer);
         ingredientSlotContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
-        ingredientSlotContainer = root.Q<VisualElement>("ActionSlotContainer");
+        actionSlotContainer = root.Q<VisualElement>("ActionSlotContainer");
         Debug.Log(ingredientSlotContainer);
     }
 
@@ -54,14 +54,24 @@ public class StationView : MonoBehaviour {
     // add action item in param
     // ingredients --> live ingredients in the station storage/stock
     // CREATE ON ORDER CREATION
-    public void InitializeView(List<Ingredient> ingredients){
+    public void InitializeView(ActionData actionData,List<Ingredient> ingredients){
         Debug.Log("Initializing Station view");
-        ingredientSlotContainer.Clear();
 
+        actionSlotContainer.Clear();
+        ActionSlot actionSlot = new(actionData);
+        Debug.Log($"Slot created for {actionSlot.ActionData.Name}");
+        actionSlot.AddToClassList("action-slot");
+        actionSlot.AddToClassList("slot");
+        actionSlotContainer.Add(actionSlot);
+        actionSlot.OnClickAction += OnAddProperty;
+
+
+        ingredientSlotContainer.Clear();
         foreach(Ingredient ingredient in ingredients){
             Slot slot = new(ingredient);
             Debug.Log("Slot created for " + slot.Ingredient.Data.Name);
-            slot.AddToClassList("ingredient-slot"); // make helper methods (extension)
+            slot.AddToClassList("ingredient-slot"); // make helper methods?
+            slot.AddToClassList("slot");
             ingredientSlotContainer.Add(slot);
             slot.OnClickIngredient += OnAddIngredient;
         }
@@ -73,13 +83,13 @@ public class StationView : MonoBehaviour {
         // TODO: Disable ingredient slot
     }
 
-    private void OnActionClicked(){
-        cookingUIEventChannel.RaiseOnAddProperty(Property.Cut); // Property enum actionProperty
+    private void OnAddProperty(ActionSlot actionSlot){
+        cookingUIEventChannel.RaiseOnAddProperty(actionSlot.ActionData.Property); // Property enum actionProperty
     }
 
     private void LoadStationView(Station station){
         // TODO: Load active ingredients
         Debug.Log("View recieved loading request from event channel");
-        InitializeView(station.StockIngredients);
+        InitializeView(station.Data.ActionData,station.StockIngredients);
     }
 }

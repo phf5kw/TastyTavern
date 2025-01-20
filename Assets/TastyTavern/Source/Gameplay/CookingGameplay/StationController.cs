@@ -47,6 +47,7 @@ public class StationController : MonoBehaviour
     private void AddIngredient(Ingredient ingredient)
     {
         station.ActiveIngredients.Add(ingredient);
+        station.PrintContents();
     }
 
     /// Applies a property to all active ingredients on the station
@@ -56,6 +57,8 @@ public class StationController : MonoBehaviour
         {
            ingredient.Properties.Add(actionProperty);
         }
+
+        station.PrintContents();
     }
 
     private void LoadStation()

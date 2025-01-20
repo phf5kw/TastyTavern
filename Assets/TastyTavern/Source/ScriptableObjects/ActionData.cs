@@ -13,4 +13,8 @@ public class ActionData : ScriptableObject
 
     [field: SerializeField]
     public Sprite Sprite { get; set; }
+
+    // The property applied after the action is completed
+    [field: SerializeField]
+    public Property Property { get; set; }
 }

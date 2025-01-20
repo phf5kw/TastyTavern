@@ -12,6 +12,15 @@ public class Ingredient {
     public Ingredient(IngredientData data){
         this.Data = data;
     }
+
+    public override string ToString(){
+        string toString = "";
+        toString += Data.Name;
+        foreach(var prop in Properties){
+            toString += prop;
+        }
+        return toString;
+    }
 }
 
 public enum Property{

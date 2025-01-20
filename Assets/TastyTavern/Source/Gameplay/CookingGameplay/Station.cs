@@ -60,9 +60,9 @@ public class Station {
         foreach ( var group in AllIngredients ){
             Debug.Log("Stock, Active, Stored:");
             foreach ( var ingredient in group ){
-                contents += ingredient.Data.Name + ", ";
+                contents += ingredient.ToString() + ", ";
             }
-            contents += "/n";
+            contents += ";";
             Debug.Log(contents);
         }
     }
