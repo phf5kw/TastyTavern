@@ -47,7 +47,7 @@ public class StationController : MonoBehaviour
         cookingUIEventChannel.RaiseOnRefreshStationView(station);
     }
 
-    /// Applies a property to all active ingredients on the station
+    /// Applies a property to all active ingredients on the station if they don't already have it
     private void AddProperty(Property actionProperty)
     {
         foreach (var ingredient in station.ActiveIngredients)
@@ -56,6 +56,7 @@ public class StationController : MonoBehaviour
                 ingredient.Properties.Add(actionProperty);
             }
         }
+        cookingUIEventChannel.RaiseOnRefreshStationView(station);
     }
 
     private void LoadStation()
