@@ -103,7 +103,7 @@ public class StationView : MonoBehaviour {
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
         slot.SetEnabled(false);
         slot.RemoveFromClassList("slot");
-        AddToStationWorkspace(slot.Ingredient);
+        AddToStationWorkspace(slot.Ingredient); // refresh station ??
     }
 
     private void OnAddProperty(ActionSlot actionSlot){
@@ -122,6 +122,11 @@ public class StationView : MonoBehaviour {
         Image icon = new(){ image = sprite.texture };
         stationTop.Add(icon);
         stationTop = icon; // update new top of stack
+    }
+
+    private void RefreshStationView(Station station){
+        stationBG.Clear();
+        for (ingredient in ActiveIngredients)
     }
 
 }
