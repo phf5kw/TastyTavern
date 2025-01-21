@@ -65,6 +65,7 @@ public class StationView : MonoBehaviour {
         actionSlot.AddToClassList("slot");
         actionSlotContainer.Add(actionSlot);
         actionSlot.OnClickAction += OnAddProperty;
+        // actionSlot.visible = false;
 
 
         ingredientSlotContainer.Clear();
@@ -79,6 +80,12 @@ public class StationView : MonoBehaviour {
         
     }
 
+    private void LoadStationView(Station station){
+        // TODO: Load active ingredients
+        Debug.Log("View recieved loading request from event channel");
+        InitializeView(station.Data.ActionData,station.StockIngredients);
+    }
+
     private void OnAddIngredient(Slot slot) {
         cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
         slot.SetEnabled(false);
@@ -89,9 +96,4 @@ public class StationView : MonoBehaviour {
         cookingUIEventChannel.RaiseOnAddProperty(actionSlot.ActionData.Property); // Property enum actionProperty
     }
 
-    private void LoadStationView(Station station){
-        // TODO: Load active ingredients
-        Debug.Log("View recieved loading request from event channel");
-        InitializeView(station.Data.ActionData,station.StockIngredients);
-    }
 }

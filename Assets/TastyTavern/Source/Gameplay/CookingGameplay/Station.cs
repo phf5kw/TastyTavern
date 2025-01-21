@@ -56,7 +56,6 @@ public class Station {
         }
         ActiveIngredients.Add(ingredient);
         StockIngredients.Remove(ingredient);
-        PrintContents();
     }
 
     // "SET ASIDE" FUNCTION
@@ -64,19 +63,6 @@ public class Station {
         StoredIngredients.AddRange(ActiveIngredients);
         ActiveIngredients.Clear();
     }
-
-    public void PrintContents(){
-        // string contents = "";
-        // contents += "Stock, Active, Stored:\n";
-        // foreach ( var group in AllIngredients ){
-        //     foreach ( var ingredient in group ){
-        //         contents += ingredient.ToString() + ", ";
-        //     }
-        //     contents += ";\n";
-        // }
-        // Debug.Log(contents);
-    }
-
     
 }
 
