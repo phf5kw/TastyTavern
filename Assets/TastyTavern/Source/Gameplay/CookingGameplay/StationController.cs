@@ -7,6 +7,7 @@ public class StationController : MonoBehaviour
     [SerializeField]
     private Station station;
 
+    // TESTING data
     public StationData stationData;
     public List<IngredientData> testStock;
 
@@ -14,13 +15,10 @@ public class StationController : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     public StationController(){
-        // for testing
-        // this.station = new(stationData,testStock);
-
-        // run initialize view uxml?
     }
 
     private void Awake(){
+        // open stay on order awake
         this.station = new(stationData,testStock);
         LoadStation();
     }
@@ -42,16 +40,14 @@ public class StationController : MonoBehaviour
         cookingUIEventChannel.OnAddProperty -= AddProperty;
     }
 
-
     /// Adds ingredient to current active workspace (from stock)
     private void AddIngredient(Ingredient ingredient)
     {
-        station.ActiveIngredients.Add(ingredient);
-        station.StockIngredients.Remove(ingredient);
-        station.PrintContents();
+        station.AddToActive(ingredient);
+        cookingUIEventChannel.RaiseOnRefreshStationView(station);
     }
 
-    /// Applies a property to all active ingredients on the station
+    /// Applies a property to all active ingredients on the station if they don't already have it
     private void AddProperty(Property actionProperty)
     {
         foreach (var ingredient in station.ActiveIngredients)
@@ -60,8 +56,7 @@ public class StationController : MonoBehaviour
                 ingredient.Properties.Add(actionProperty);
             }
         }
-
-        station.PrintContents();
+        cookingUIEventChannel.RaiseOnRefreshStationView(station);
     }
 
     private void LoadStation()

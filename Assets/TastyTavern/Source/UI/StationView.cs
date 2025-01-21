@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using Mono.Cecil.Cil;
+using Unity.VisualScripting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,6 +19,11 @@ public class StationView : MonoBehaviour {
     public VisualElement root;
     public VisualElement ingredientSlotContainer;
     public VisualElement actionSlotContainer;
+    public VisualElement stationWorkspaceContainer;
+    public VisualElement stationTop;
+
+    public Image stationBG;
+
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
@@ -27,11 +33,13 @@ public class StationView : MonoBehaviour {
     private void OnEnable()
     {
         cookingUIEventChannel.OnLoadStationView += LoadStationView;
+        cookingUIEventChannel.OnRefreshStationView += RefreshStationView;
     }
 
     private void OnDisable() 
     {
         cookingUIEventChannel.OnLoadStationView -= LoadStationView;
+        cookingUIEventChannel.OnRefreshStationView -= RefreshStationView;
     }
 
     private void Awake(){
@@ -40,7 +48,7 @@ public class StationView : MonoBehaviour {
         Debug.Log("root is" + ingredientSlotContainer);
         ingredientSlotContainer = root.Q<VisualElement>("IngredientSlotContainer"); //already style?
         actionSlotContainer = root.Q<VisualElement>("ActionSlotContainer");
-        Debug.Log(ingredientSlotContainer);
+        stationWorkspaceContainer = root.Q<VisualElement>("StationWorkspaceContainer");
     }
 
     private void Start(){
@@ -50,12 +58,13 @@ public class StationView : MonoBehaviour {
         //     punchPepper.Create()
         // };
         // InitializeView(dummyIngredients);
+        // stationWorkspaceContainer.Clear();
     }
 
     // add action item in param
     // ingredients --> live ingredients in the station storage/stock
-    // CREATE ON ORDER CREATION
-    public void InitializeView(ActionData actionData,List<Ingredient> ingredients){
+    // TODO: Change params to just use station
+    public void InitializeView(Station station, ActionData actionData,List<Ingredient> ingredients){
         Debug.Log("Initializing Station view");
 
         actionSlotContainer.Clear();
@@ -65,7 +74,7 @@ public class StationView : MonoBehaviour {
         actionSlot.AddToClassList("slot");
         actionSlotContainer.Add(actionSlot);
         actionSlot.OnClickAction += OnAddProperty;
-
+        // actionSlot.visible = false;
 
         ingredientSlotContainer.Clear();
         foreach(Ingredient ingredient in ingredients){
@@ -76,11 +85,23 @@ public class StationView : MonoBehaviour {
             ingredientSlotContainer.Add(slot);
             slot.OnClickIngredient += OnAddIngredient;
         }
-        
+
+        // bring back stationWorkspaceContainer
+        // if (stationWorkspaceContainer.visible == false){
+        //     stationWorkspaceContainer.visible = true;
+        // }
+        stationBG = new(){ image = station.Data.Background.texture };
+        stationWorkspaceContainer.Add(stationBG);
+        stationTop = stationBG;
+    }
+
+    private void LoadStationView(Station station){
+        Debug.Log("View recieved loading request from event channel");
+        InitializeView(station,station.Data.ActionData,station.StockIngredients);
     }
 
     private void OnAddIngredient(Slot slot) {
-        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
+        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); // adds ingredient, calls refresh
         slot.SetEnabled(false);
         slot.RemoveFromClassList("slot");
     }
@@ -89,9 +110,26 @@ public class StationView : MonoBehaviour {
         cookingUIEventChannel.RaiseOnAddProperty(actionSlot.ActionData.Property); // Property enum actionProperty
     }
 
-    private void LoadStationView(Station station){
-        // TODO: Load active ingredients
-        Debug.Log("View recieved loading request from event channel");
-        InitializeView(station.Data.ActionData,station.StockIngredients);
+    private void AddToStationWorkspace(Ingredient ingredient){
+        Sprite sprite;
+        if( ingredient.Properties.Contains(Property.Cut) && ingredient.Properties.Contains(Property.Cooked) ){
+            sprite = ingredient.Data.Sprites[3];
+        } else if (ingredient.Properties.Contains(Property.Cut)){
+            sprite = ingredient.Data.Sprites[2];
+        } else {
+            sprite = ingredient.Data.Sprites[1];
+        }
+        Image icon = new(){ image = sprite.texture };
+        stationTop.Add(icon);
+        stationTop = icon; // update new top of stack
     }
+
+    private void RefreshStationView(Station station){
+        stationBG.Clear();
+        stationTop = stationBG;
+        foreach (var ingredient in station.ActiveIngredients){
+            AddToStationWorkspace(ingredient);
+        }
+    }
+
 }

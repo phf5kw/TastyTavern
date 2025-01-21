@@ -16,7 +16,7 @@ public class Slot : Button {
 
         Icon = new()
         {
-            image = Ingredient.Data.Sprite.texture
+            image = Ingredient.Data.Sprites[0].texture
         };
 
         Label.text = Ingredient.Data.Name;

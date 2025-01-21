@@ -33,14 +33,6 @@ public class Station {
         };
     }
 
-    // Why not just make Station using normal constructor outside of the Data class? Pass in as Ingredient instead perhaps?
-
-    // "SET ASIDE" FUNCTION
-    public void MoveActiveToStored(){
-        StoredIngredients.AddRange(ActiveIngredients);
-        ActiveIngredients.Clear();
-    }
-
     // Change data, move new Stock and ingredients in Active and Stored to Stock
     public void ChangeStation(StationData data, List<IngredientData> stock){
         this.Data = data;
@@ -55,18 +47,22 @@ public class Station {
         StoredIngredients.Clear();
     }
 
-    public void PrintContents(){
-        string contents = "";
-        foreach ( var group in AllIngredients ){
-            Debug.Log("Stock, Active, Stored:");
-            foreach ( var ingredient in group ){
-                contents += ingredient.ToString() + ", ";
-            }
-            contents += ";";
-            Debug.Log(contents);
+    /// Adds ingredient to current active workspace (from stock)
+    /// If the station type is cutting board, store active when a new ingredient is added
+    /// TODO: Animation into storage?
+    public void AddToActive(Ingredient ingredient){
+        if (Data.StationType == StationType.CuttingBoard){
+            StoreActiveIngredients();
         }
+        ActiveIngredients.Add(ingredient);
+        StockIngredients.Remove(ingredient);
     }
 
+    // "SET ASIDE" FUNCTION
+    public void StoreActiveIngredients(){
+        StoredIngredients.AddRange(ActiveIngredients);
+        ActiveIngredients.Clear();
+    }
     
 }
 
