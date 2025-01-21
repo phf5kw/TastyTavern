@@ -66,15 +66,15 @@ public class Station {
     }
 
     public void PrintContents(){
-        string contents = "";
-        foreach ( var group in AllIngredients ){
-            Debug.Log("Stock, Active, Stored:");
-            foreach ( var ingredient in group ){
-                contents += ingredient.ToString() + ", ";
-            }
-            contents += ";";
-            Debug.Log(contents);
-        }
+        // string contents = "";
+        // contents += "Stock, Active, Stored:\n";
+        // foreach ( var group in AllIngredients ){
+        //     foreach ( var ingredient in group ){
+        //         contents += ingredient.ToString() + ", ";
+        //     }
+        //     contents += ";\n";
+        // }
+        // Debug.Log(contents);
     }
 
     
