@@ -21,6 +21,7 @@ public class StationController : MonoBehaviour
     }
 
     private void Awake(){
+        // open stay on order awake
         this.station = new(stationData,testStock);
         LoadStation();
     }
@@ -46,9 +47,7 @@ public class StationController : MonoBehaviour
     /// Adds ingredient to current active workspace (from stock)
     private void AddIngredient(Ingredient ingredient)
     {
-        station.ActiveIngredients.Add(ingredient);
-        station.StockIngredients.Remove(ingredient);
-        station.PrintContents();
+        station.AddToActive(ingredient);
     }
 
     /// Applies a property to all active ingredients on the station

@@ -15,10 +15,10 @@ public class Ingredient {
 
     public override string ToString(){
         string toString = "";
-        toString += Data.Name;
         foreach(var prop in Properties){
-            toString += prop;
+            toString += prop + " ";
         }
+        toString += Data.Name; 
         return toString;
     }
 }
