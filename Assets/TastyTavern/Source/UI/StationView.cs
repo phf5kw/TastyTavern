@@ -33,11 +33,13 @@ public class StationView : MonoBehaviour {
     private void OnEnable()
     {
         cookingUIEventChannel.OnLoadStationView += LoadStationView;
+        cookingUIEventChannel.OnRefreshStationView += RefreshStationView;
     }
 
     private void OnDisable() 
     {
         cookingUIEventChannel.OnLoadStationView -= LoadStationView;
+        cookingUIEventChannel.OnRefreshStationView -= RefreshStationView;
     }
 
     private void Awake(){
@@ -94,16 +96,14 @@ public class StationView : MonoBehaviour {
     }
 
     private void LoadStationView(Station station){
-        // TODO: Load active ingredients
         Debug.Log("View recieved loading request from event channel");
         InitializeView(station,station.Data.ActionData,station.StockIngredients);
     }
 
     private void OnAddIngredient(Slot slot) {
-        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); 
+        cookingUIEventChannel.RaiseOnAddIngredient(slot.Ingredient); // adds ingredient, calls refresh
         slot.SetEnabled(false);
         slot.RemoveFromClassList("slot");
-        AddToStationWorkspace(slot.Ingredient); // refresh station ??
     }
 
     private void OnAddProperty(ActionSlot actionSlot){
@@ -126,7 +126,10 @@ public class StationView : MonoBehaviour {
 
     private void RefreshStationView(Station station){
         stationBG.Clear();
-        for (ingredient in ActiveIngredients)
+        stationTop = stationBG;
+        foreach (var ingredient in station.ActiveIngredients){
+            AddToStationWorkspace(ingredient);
+        }
     }
 
 }
