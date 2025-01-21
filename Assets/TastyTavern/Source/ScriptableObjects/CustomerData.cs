@@ -9,7 +9,7 @@ public class Customer { // change to class?
     public string Name { get; set; }
 
     [field: SerializeField]
-    public CurrentOrderManager CurrentOrderManager { get; set; }
+    public OrderManager CurrentOrderManager { get; set; }
 
     [field: SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
