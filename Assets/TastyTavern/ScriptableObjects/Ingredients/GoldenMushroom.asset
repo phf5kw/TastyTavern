@@ -14,4 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Golden Mushroom
   <Description>k__BackingField: 
-  <Sprite>k__BackingField: {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}
+  <Sprites>k__BackingField:
+  - {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}
+  - {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}
+  - {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}
+  - {fileID: -4670188270482155086, guid: 62c76adf3224d174a94475997571184a, type: 3}
