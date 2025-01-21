@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class CurrentOrderManager : MonoBehaviour
+public class OrderManager : MonoBehaviour
 {
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
@@ -27,14 +27,14 @@ public class CurrentOrderManager : MonoBehaviour
 
     private void OnEnable()
     {
-        cookingUIEventChannel.OnOpenOrder += handleOpenOrder;
-        cookingUIEventChannel.OnSubmitOrder += handleSubmitOrder;
+        cookingUIEventChannel.OnOpenOrder += CreateOrder;
+        cookingUIEventChannel.OnSubmitOrder += SubmitOrder;
     }
 
     private void OnDisable()
     {
-        cookingUIEventChannel.OnOpenOrder -= handleOpenOrder;
-        cookingUIEventChannel.OnSubmitOrder -= handleSubmitOrder;
+        cookingUIEventChannel.OnOpenOrder -= CreateOrder;
+        cookingUIEventChannel.OnSubmitOrder -= SubmitOrder;
     }
 
 
@@ -56,11 +56,11 @@ public class CurrentOrderManager : MonoBehaviour
         // update menu where? how does it know the data
     }
 
-    public void handleOpenOrder(Order order)
+    public void CreateOrder(Order order)
     {
         allOrders.Add(order);
     }
-    public void handleSubmitOrder(Order order)
+    public void SubmitOrder(Order order)
     {
         if (order.isComplete())
             allOrders.Remove(order);

@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      genshinfish_0: 1971571741212690949
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

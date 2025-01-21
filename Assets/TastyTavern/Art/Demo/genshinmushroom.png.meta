@@ -134,7 +134,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      genshinmushroom_0: -4670188270482155086
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -19,9 +19,7 @@ public class CookingUIEventChannel : ScriptableObject {
     /// <summary> Callback when an order is opened in the UI </summary>
     public Action<Order> OnOpenOrder;
 
-    /// <summary>
     /// Callback when an order is submitted in the UI by the player
-    /// </summary>
     public Action<Order> OnSubmitOrder;
 
     public void RaiseOnAddIngredient(Ingredient ingredient){
