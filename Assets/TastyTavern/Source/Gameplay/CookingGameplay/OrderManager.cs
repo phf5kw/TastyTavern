@@ -10,6 +10,9 @@ public class OrderManager : MonoBehaviour
     private CookingUIEventChannel cookingUIEventChannel;
 
     [SerializeField]
+    private CustomerController customerController;
+
+    [SerializeField]
     private Order currentOrder; 
 
     [SerializeField]
@@ -62,8 +65,9 @@ public class OrderManager : MonoBehaviour
     }
     public void SubmitOrder(Order order)
     {
-        if (order.isComplete())
-            allOrders.Remove(order);
+        allOrders.Remove(order);
+        if (order.isCorrect())
+            Debug.Log("Order is correct");
             // other things can happen here like money? etc. like playerMoney += order.Recipe.Price; or something like that
     }
 }

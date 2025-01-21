@@ -3,7 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem.Utilities;
 
-public class Customer { // change to class?
+public class Customer : MonoBehaviour{ // change to class?
     
     [field: SerializeField]
     public string Name { get; set; }
@@ -51,6 +51,11 @@ public class Customer { // change to class?
         Order = new Order(this, r, SelectedIngredients);
         PlaceCustomerOrder(Order);
         this.Biome = Biome;
+    }
+
+    public Customer()
+    {
+
     }
 
     private void PlaceCustomerOrder(Order Order)

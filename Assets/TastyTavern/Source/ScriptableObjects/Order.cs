@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class Order
+public class Order : MonoBehaviour
 {
     // [field: SerializeField]
     // public int OrderSlot { get; set; }
@@ -35,7 +35,7 @@ public class Order
         CurrentStation = null; // This needs to be whatever the default station is... I don't know yet
     }
 
-    public bool isComplete()
+    public bool isCorrect()
     {
         foreach (Ingredient ingredient in CurrentStation.ActiveIngredients)
         {
