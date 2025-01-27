@@ -16,17 +16,21 @@ public class CustomerController : MonoBehaviour
     /// </summary>
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    [field: SerializeField]
-    public List<Customer> customers { get; }
+    private GameObject[] customers = new GameObject[3];
 
     [SerializeField]
     private CookingUIEventChannel cookingUIEventChannel;
 
-    [field: SerializeField]
-    public int Difficulty { get; set; }
+    [SerializeField]
+    private BiomeData selectedBiome;
+
+    [SerializeField]
+    private int Difficulty;
     private double nextSpawnTime = 0.0;
-    public float baseDelay = 25f; // Base delay in seconds for difficulty = 1.
-    public float randomOffset = 10f; // Maximum random offset added or subtracted from the delay.;
+    public float baseDelay = 0f; // Base delay in seconds for difficulty = 1.
+    public float randomOffset = 0f; // Maximum random offset added or subtracted from the delay.;
+    public GameObject customerPrefab;
+
     [SerializeField]
     private List<Transform> CustomerSpots;
 
@@ -67,13 +71,31 @@ public class CustomerController : MonoBehaviour
 
     public bool CreateCustomer()
     {
-        Customer c = new Customer(/*random stuff for each customer*/);
-        for (int i = 0; i < customers.Count; i++)
+        // Inefficiency: For loop will always be running. Technically it's O(1) every frame since the length of the customers list is a constant 3, but still. 
+        // Could be optimized to only run when a spot in customers is null, but I can't use customers.Length b/c it is always 3 since I set it that way. 
+        for (int i = 0; i < CustomerSpots.Count; i++)
         {
             if (customers[i] == null)
             {
-                customers.Insert(i, c);
-                customers[i].transform.position = CustomerSpots[i].position;
+                Debug.Log($"Found empty customer spot in {i}");
+                // Create the CustomerData
+                CustomerData data = new CustomerData(
+                    name: "Customer " + Random.Range(1, 100),
+                    appearance: new List<Sprite>(), // Replace with actual sprites
+                    faces: new List<Sprite>(), // Replace with actual face sprites
+                    dialogue: new List<string> { "Hello!", "Thanks!", "Oh no!" },
+                    patience: Random.Range(50, 100),
+                    biome: selectedBiome // Replace with the current biome
+                );
+
+                // Instantiate prefab and initialize
+                GameObject customerObj = Instantiate(customerPrefab, CustomerSpots[i].position, Quaternion.identity);
+                Customer customerScript = customerObj.GetComponent<Customer>();
+                customerScript.Initialize(data);
+
+                // Track the customer
+                customers[i] = customerObj;
+
                 return true;
             }
         }
@@ -84,11 +106,11 @@ public class CustomerController : MonoBehaviour
     public void RemoveCustomer(Order order)
     {
         Customer c = order.Customer;
-        for (int i = 0; i < customers.Count; i++) 
+        for (int i = 0; i < customers.Length; i++) 
         {
             if (customers[i].Equals(c))
             {
-                customers.RemoveAt(i);
+                customers[i] = null;
                 Destroy(customers[i]);
             }
         }
